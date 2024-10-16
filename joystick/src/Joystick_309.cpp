@@ -20,7 +20,7 @@ uint16_t Joystick::getRawX(){
 
 uint16_t Joystick::getRawY(){
     
-    return analogRead(m_pin_Joystick_X);
+    return analogRead(m_pin_Joystick_Y);
     
 }
 
