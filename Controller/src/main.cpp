@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include <multiplexer.h>
-#include <Joystick_309.h>
+#include <Joystick.h>
 
 Multiplexer Multiplexer(4, 5, 6, 7, A4);
 // Joystick Joystick();
