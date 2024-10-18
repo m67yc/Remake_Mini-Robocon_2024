@@ -26,10 +26,10 @@ class Joystick {
         /*...*/
 
     public:
-        Joystick(const uint8_t pin_Joystick_X, const uint8_t pin_Joystick_Y);
+        Joystick();
 
-        uint16_t getRawX();
-        uint16_t getRawY();
+        // uint16_t getRawX();
+        // uint16_t getRawY();
 
         void setDeadZoneX();
         void setDeadZoneY();
@@ -37,10 +37,10 @@ class Joystick {
         void setDeadZoneX(uint16_t DeadZoneX_insideRight, uint16_t DeadZoneX_insideLeft, uint16_t DeadZoneX_outsideRight, uint16_t DeadZoneX_outsideLeft);
         void setDeadZoneY(uint16_t DeadZoneY_insideTop, uint16_t DeadZoneY_insideBottom, uint16_t DeadZoneY_outsideTop, uint16_t DeadZoneY_outsideBottom);
 
-        int16_t getMapX();
-        int16_t getMapY();
+        uint16_t getMapX(uint16_t value);
+        uint16_t getMapY(uint16_t value);
 
-        void showRawValue();
+        // void showRawValue();
         void showMapValue();
 
 };

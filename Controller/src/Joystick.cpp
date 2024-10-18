@@ -2,27 +2,23 @@
 
 // Must Check the function can run successful befor go to next function
 
-Joystick::Joystick(const uint8_t pin_Joystick_X, const uint8_t pin_Joystick_Y)
-: m_pin_Joystick_X(pin_Joystick_X), m_pin_Joystick_Y(pin_Joystick_Y){
+Joystick::Joystick(){
 
-    pinMode(m_pin_Joystick_X, INPUT);
-    pinMode(m_pin_Joystick_Y, INPUT);
-    m_RawX = getRawX();
-    m_RawY = getRawY();
+    
 
 }
 
-uint16_t Joystick::getRawX(){
+// uint16_t Joystick::getRawX(){
 
-    return analogRead(m_pin_Joystick_X);
+//     return analogRead(m_pin_Joystick_X);
     
-}
+// }
 
-uint16_t Joystick::getRawY(){
+// uint16_t Joystick::getRawY(){
     
-    return analogRead(m_pin_Joystick_X);
+//     return analogRead(m_pin_Joystick_X);
     
-}
+// }
 
 
 void Joystick::setDeadZoneX(){
@@ -57,36 +53,40 @@ void Joystick::setDeadZoneY(uint16_t DeadZoneY_insideTop, uint16_t DeadZoneY_ins
 }
 
 
-int16_t Joystick::getMapX(){
+uint16_t Joystick::getMapX(uint16_t value){
 
-    if(getRawX() < m_DeadZoneX_insideLeft && getRawX() > m_DeadZoneX_insideRight){
-        if(getRawX() > m_DeadZoneX_outsideLeft && getRawX() < m_DeadZoneX_outsideRight){
-            m_MapX = map(getRawX(), 0, 1023, 0, 255);
+    uint16_t m_value = value;
+
+    if(m_value < m_DeadZoneX_insideLeft && m_value > m_DeadZoneX_insideRight){
+        if(m_value > m_DeadZoneX_outsideLeft && m_value < m_DeadZoneX_outsideRight){
+            m_MapX = map(m_value, 0, 1023, -255, 255);
         }
         else{
-            m_MapX = getRawX() < m_DeadZoneX_outsideLeft ? m_DeadZoneX_outsideLeft : m_DeadZoneX_outsideRight;
+            m_MapX = map((m_value < m_DeadZoneX_outsideLeft ? m_DeadZoneX_outsideLeft : m_DeadZoneX_outsideRight), 0, 1023, 0, 255);
         }
     }
     else{
-        m_MapX = m_RawX;
+        m_MapX = 0;
     }
 
     return m_MapX;
 
 }
 
-int16_t Joystick::getMapY(){
+uint16_t Joystick::getMapY(uint16_t value){
 
-    if(getRawY() < m_DeadZoneY_insideBottom && getRawY() > m_DeadZoneY_insideTop){
-        if(getRawY() > m_DeadZoneY_insideBottom && getRawY() < m_DeadZoneY_outsideTop){
-            m_MapY = map(getRawY(), 0, 1023, 0, 255);
+    uint16_t m_value = value;
+
+    if(m_value < m_DeadZoneY_insideBottom && m_value > m_DeadZoneY_insideTop){
+        if(m_value > m_DeadZoneY_insideBottom && m_value < m_DeadZoneY_outsideTop){
+            m_MapY = map(m_value, 0, 1023, -255, 255);
         }
         else{
-            m_MapY = getRawY() < m_DeadZoneY_outsideBottom ? m_DeadZoneY_outsideBottom : m_DeadZoneY_outsideTop;
+            m_MapY = map((m_value < m_DeadZoneY_outsideBottom ? m_DeadZoneY_outsideBottom : m_DeadZoneY_outsideTop), 0, 1023, 0, 255);
         }
     }
     else{
-        m_MapY = m_RawY;
+        m_MapY = 0;
     }
 
     return m_MapY;
@@ -94,20 +94,20 @@ int16_t Joystick::getMapY(){
 }
 
 
-void Joystick::showRawValue(){
+// void Joystick::showRawValue(){
 
-    Serial.print("X: ");
-    Serial.print(getRawX());
-    Serial.print("  ;   Y: ");
-    Serial.println(getRawY());
+//     Serial.print("X: ");
+//     Serial.print(getRawX());
+//     Serial.print("  ;   Y: ");
+//     Serial.println(getRawY());
 
-}
+// }
 
 void Joystick::showMapValue(){
 
     Serial.print("X: ");
-    Serial.print(getMapX());
+    Serial.print(m_MapX);
     Serial.print("  ;   Y: ");
-    Serial.println(getMapY());
+    Serial.println(m_MapY);
     
 }

@@ -3,7 +3,7 @@
 #include <Joystick.h>
 
 Multiplexer Multiplexer(4, 5, 6, 7, A4);
-// Joystick Joystick();
+Joystick Joystick();
 
 void setup() {
 
