@@ -103,11 +103,11 @@ uint16_t Joystick::getMapY(uint16_t value){
 
 // }
 
-void Joystick::showMapValue(){
+void Joystick::showMapValue(uint16_t valueX, uint16_t valueY){
 
     Serial.print("X: ");
-    Serial.print(m_MapX);
+    Serial.print(getMapX(valueX));
     Serial.print("  ;   Y: ");
-    Serial.println(m_MapY);
+    Serial.println(getMapY(valueY));
     
 }

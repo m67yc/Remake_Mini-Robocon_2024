@@ -41,6 +41,6 @@ class Joystick {
         uint16_t getMapY(uint16_t value);
 
         // void showRawValue();
-        void showMapValue();
+        void showMapValue(uint16_t valueX, uint16_t valueY);
 
 };
